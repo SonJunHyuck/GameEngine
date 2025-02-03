@@ -1,8 +1,10 @@
-﻿// Editor_Window.cpp : Defines the entry point for the application.
+// Editor_Window.cpp : Defines the entry point for the application.
 //
 
 #include "framework.h"
 #include "Editor_Window.h"
+
+#include "..\\GameEngine_Source\GEApplication.h"
 
 #define MAX_LOADSTRING 100
 
@@ -26,6 +28,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
+    
+    Application app = Application ();
+    app.Test ();
+    //
+    //
+    //
+    // 
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -43,15 +52,44 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
+    // GetMessage : 프로세스에서 발생한 메시지를 메시지 큐에서 가져오는 함수
+    // 아무것도 없다면, 아무 메시지도 가져오지 않는다.
+
+    // PeekMessage : 메시지 큐에 메시지 유무에 상관없이 함수가 리턴된다.
+    // true : 메시지 있음
+    // false : 메시지 없음
+
     // Main message loop:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while ( true )
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if ( PeekMessage ( &msg , nullptr , 0 , 0 , PM_REMOVE ) )
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            if ( msg.message == WM_QUIT )
+            {
+                break;
+            }
+
+            if ( !TranslateAccelerator ( msg.hwnd , hAccelTable , &msg ) )
+            {
+                TranslateMessage ( &msg );
+                DispatchMessage ( &msg );
+            }
+        }
+        else
+        {
+            // int a = 5;
+            // 메시지가 없다면 여기서 처리 -> 게임 로직
         }
     }
+
+    /*while (GetMessage(&msg, nullptr, 0, 0))
+    {
+        if ( !TranslateAccelerator ( msg.hwnd , hAccelTable , &msg ) )
+        {
+            TranslateMessage ( &msg );
+            DispatchMessage ( &msg );
+        }
+    }*/
 
     return (int) msg.wParam;
 }
