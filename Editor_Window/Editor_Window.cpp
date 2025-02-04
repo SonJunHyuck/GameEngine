@@ -8,6 +8,8 @@
 
 #define MAX_LOADSTRING 100
 
+GE::Application application;
+
 // Global Variables:
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
@@ -29,12 +31,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // TODO: Place code here.
     
-    Application app = Application ();
-    app.Test ();
-    //
-    //
-    //
-    // 
+
 
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -77,19 +74,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-            // int a = 5;
-            // 메시지가 없다면 여기서 처리 -> 게임 로직
+            application.Run ();
         }
     }
-
-    /*while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if ( !TranslateAccelerator ( msg.hwnd , hAccelTable , &msg ) )
-        {
-            TranslateMessage ( &msg );
-            DispatchMessage ( &msg );
-        }
-    }*/
 
     return (int) msg.wParam;
 }
@@ -138,6 +125,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+
+   application.Initialize ( hWnd );
 
    // 윈도우 2개도 생성 가능
    // HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
@@ -189,43 +178,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
 
-            // DC : 화면 출력에 필요한 모든 정보를 가지는 데이터 구조체
-            // GDI 모듈에 의해 관리
-            // 폰트, 선 종류, 면 생상 등
-            // 화면 출력에 필요한 모든 경우는 WINAPI에서는 DC를 통해서 작업한다.
-
-            // 파란색 사각형 + 검은 테두리
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 255));
-            HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);  // 파란색 면 지정, 흰색 면 저장
-            Rectangle(hdc, 100, 100, 200, 200);
-            DeleteObject(brush);  // 파란색 면 삭제 (brush는 주소일 뿐, 메모리에는 계속 있으니까 지워주어야 함)
-            SelectObject(hdc, oldBrush);  // 흰색 면 지정
-
-            // 흰색 원 + 빨간색 테두리
-            HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));  // 빨간 펜 생성
-            HPEN oldPen = (HPEN)SelectObject(hdc, redPen);  // 빨간 테두리 지정
-            Ellipse(hdc, 200, 200, 300, 300);
-            DeleteObject(redPen);  // 빨간 펜 메모리 삭제
-            SelectObject(hdc, oldPen);  // 검은섹 테두리 지정
-            
-            // 회색 사각형 + 검은 테두리
-            HBRUSH grayBrush = (HBRUSH)GetStockObject(GRAY_BRUSH);  // 브러쉬를 만들지말고, 기존의 것 사용
-            oldBrush = (HBRUSH)SelectObject(hdc, grayBrush);  // 흰색 브러쉬 저장
-            Rectangle(hdc, 400, 400, 500, 500);
-            SelectObject(hdc, oldBrush);  // 흰색 브러쉬로 되돌리기
-
-            // 흰색 원 + 빨간색 테두리
-            HPEN greenPen = CreatePen(PS_DOT, 1, RGB(0, 255, 0));  // 펜 생성
-            HBRUSH crossBrush = (HBRUSH)CreateHatchBrush(HS_CROSS, RGB(255, 255, 0));  // 프러쉬 생성
-            oldPen = (HPEN)SelectObject(hdc, greenPen);  // 지정
-            oldBrush = (HBRUSH)SelectObject(hdc, crossBrush);
-            Ellipse(hdc, 500, 500, 600, 600);  // 그리기
-            DeleteObject(greenPen);
-            DeleteObject(crossBrush);
-            SelectObject(hdc, oldPen);
-            SelectObject(hdc, oldBrush);
-
             // TODO: Add any drawing code that uses hdc here...
+
             EndPaint(hWnd, &ps);
         }
         break;
