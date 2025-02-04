@@ -1,7 +1,9 @@
 #pragma once
 #include "CommonInclude.h"
+#include "geGameObject.h"
+#include "geGameObject2.h"
 
-namespace GE
+namespace ge
 {
 	class Application
 	{
@@ -20,8 +22,12 @@ namespace GE
 		HDC mHdc;
 
 		float mSpeed;
-		float mX;
-		float mY;
 
+		// 플레이어
+		/*float mX;
+		float mY;*/
+
+		GameObject mPlayer;
+		GameObject2 mPlayer2;
 	};
 }

@@ -15,9 +15,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)GEApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)geGameObject.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)geApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)geGameObject2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)GEApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)geGameObject.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)geApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)geGameObject2.cpp" />
   </ItemGroup>
 </Project>

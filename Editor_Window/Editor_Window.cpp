@@ -8,7 +8,7 @@
 
 #define MAX_LOADSTRING 100
 
-GE::Application application;
+ge::Application application;
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
