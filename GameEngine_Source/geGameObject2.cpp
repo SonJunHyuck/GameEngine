@@ -1,4 +1,5 @@
 #include "geGameObject2.h"
+#include "geInput.h"
 
 namespace ge
 {
@@ -14,19 +15,19 @@ namespace ge
 
 	void GameObject2::Update()
 	{
-		if (GetAsyncKeyState('A') & 0x8000)
+		if (Input::GetKey(eKeyCode::A))
 		{
 			mX -= 0.1f;
 		}
-		if (GetAsyncKeyState('D') & 0x8000)
+		if (Input::GetKey(eKeyCode::D))
 		{
 			mX += 0.1f;
 		}
-		if (GetAsyncKeyState('W') & 0x8000)
+		if (Input::GetKey(eKeyCode::W))
 		{
 			mY -= 0.1f;
 		}
-		if (GetAsyncKeyState('S') & 0x8000)
+		if (Input::GetKey(eKeyCode::S))
 		{
 			mY += 0.1f;
 		}
@@ -40,23 +41,23 @@ namespace ge
 	void GameObject2::Render(HDC hdc)
 	{
 
-		// DC : È­¸é Ãâ·Â¿¡ ÇÊ¿äÇÑ ¸ğµç Á¤º¸¸¦ °¡Áö´Â µ¥ÀÌÅÍ ±¸Á¶Ã¼
-		// GDI ¸ğµâ¿¡ ÀÇÇØ °ü¸®
-		// ÆùÆ®, ¼± Á¾·ù, ¸é »ı»ó µî
-		// È­¸é Ãâ·Â¿¡ ÇÊ¿äÇÑ ¸ğµç °æ¿ì´Â WINAPI¿¡¼­´Â DC¸¦ ÅëÇØ¼­ ÀÛ¾÷ÇÑ´Ù.
+		// DC : í™”ë©´ ì¶œë ¥ì— í•„ìš”í•œ ëª¨ë“  ì •ë³´ë¥¼ ê°€ì§€ëŠ” ë°ì´í„° êµ¬ì¡°ì²´
+		// GDI ëª¨ë“ˆì— ì˜í•´ ê´€ë¦¬
+		// í°íŠ¸, ì„  ì¢…ë¥˜, ë©´ ìƒìƒ ë“±
+		// í™”ë©´ ì¶œë ¥ì— í•„ìš”í•œ ëª¨ë“  ê²½ìš°ëŠ” WINAPIì—ì„œëŠ” DCë¥¼ í†µí•´ì„œ ì‘ì—…í•œë‹¤.
 
-		// ÆÄ¶õ»ö »ç°¢Çü + °ËÀº Å×µÎ¸®
+		// íŒŒë€ìƒ‰ ì‚¬ê°í˜• + ê²€ì€ í…Œë‘ë¦¬
 		HBRUSH brush = CreateSolidBrush(RGB(255, 0, 0));
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);  // ÆÄ¶õ»ö ¸é ÁöÁ¤, Èò»ö ¸é ÀúÀå
+		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);  // íŒŒë€ìƒ‰ ë©´ ì§€ì •, í°ìƒ‰ ë©´ ì €ì¥
 
-		HPEN redPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));  // »¡°£ Ææ »ı¼º
-		HPEN oldPen = (HPEN)SelectObject(hdc, redPen);  // »¡°£ Å×µÎ¸® ÁöÁ¤
+		HPEN redPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 0));  // ë¹¨ê°„ íœ ìƒì„±
+		HPEN oldPen = (HPEN)SelectObject(hdc, redPen);  // ë¹¨ê°„ í…Œë‘ë¦¬ ì§€ì •
 
 		Ellipse(hdc, 1000 + mX, 500 + mY, 1100 + mX, 600 + mY);
-		DeleteObject(brush);  // ÆÄ¶õ»ö ¸é »èÁ¦ (brush´Â ÁÖ¼ÒÀÏ »Ó, ¸Ş¸ğ¸®¿¡´Â °è¼Ó ÀÖÀ¸´Ï±î Áö¿öÁÖ¾î¾ß ÇÔ)
-		SelectObject(hdc, oldBrush);  // Èò»ö ¸é ÁöÁ¤
+		DeleteObject(brush);  // íŒŒë€ìƒ‰ ë©´ ì‚­ì œ (brushëŠ” ì£¼ì†Œì¼ ë¿, ë©”ëª¨ë¦¬ì—ëŠ” ê³„ì† ìˆìœ¼ë‹ˆê¹Œ ì§€ì›Œì£¼ì–´ì•¼ í•¨)
+		SelectObject(hdc, oldBrush);  // í°ìƒ‰ ë©´ ì§€ì •
 
-		DeleteObject(redPen);  // »¡°£ Ææ ¸Ş¸ğ¸® »èÁ¦
-		SelectObject(hdc, oldPen);  // °ËÀº¼½ Å×µÎ¸® ÁöÁ¤
+		DeleteObject(redPen);  // ë¹¨ê°„ íœ ë©”ëª¨ë¦¬ ì‚­ì œ
+		SelectObject(hdc, oldPen);  // ê²€ì€ì„¹ í…Œë‘ë¦¬ ì§€ì •
 	}
 }

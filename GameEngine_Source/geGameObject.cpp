@@ -1,4 +1,5 @@
 #include "geGameObject.h"
+#include "geInput.h"
 
 namespace ge
 {
@@ -14,7 +15,24 @@ namespace ge
 
 	void GameObject::Update()
 	{
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		if (Input::GetKey(eKeyCode::Left))
+		{
+			mX -= 0.1f;
+		}
+		if (Input::GetKey(eKeyCode::Right))
+		{
+			mX += 0.1f;
+		}
+		if (Input::GetKey(eKeyCode::Up))
+		{
+			mY -= 0.1f;
+		}
+		if (Input::GetKey(eKeyCode::Down))
+		{
+			mY += 0.1f;
+		}
+
+		/*if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		{
 			mX -= 0.1f;
 		}
@@ -29,7 +47,7 @@ namespace ge
 		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
 		{
 			mY += 0.1f;
-		}
+		}*/
 	}
 
 	void GameObject::LateUpdate()
@@ -40,23 +58,23 @@ namespace ge
 	void GameObject::Render(HDC hdc)
 	{
 
-		// DC : È­¸é Ãâ·Â¿¡ ÇÊ¿äÇÑ ¸ğµç Á¤º¸¸¦ °¡Áö´Â µ¥ÀÌÅÍ ±¸Á¶Ã¼
-		// GDI ¸ğµâ¿¡ ÀÇÇØ °ü¸®
-		// ÆùÆ®, ¼± Á¾·ù, ¸é »ı»ó µî
-		// È­¸é Ãâ·Â¿¡ ÇÊ¿äÇÑ ¸ğµç °æ¿ì´Â WINAPI¿¡¼­´Â DC¸¦ ÅëÇØ¼­ ÀÛ¾÷ÇÑ´Ù.
+		// DC : í™”ë©´ ì¶œë ¥ì— í•„ìš”í•œ ëª¨ë“  ì •ë³´ë¥¼ ê°€ì§€ëŠ” ë°ì´í„° êµ¬ì¡°ì²´
+		// GDI ëª¨ë“ˆì— ì˜í•´ ê´€ë¦¬
+		// í°íŠ¸, ì„  ì¢…ë¥˜, ë©´ ìƒìƒ ë“±
+		// í™”ë©´ ì¶œë ¥ì— í•„ìš”í•œ ëª¨ë“  ê²½ìš°ëŠ” WINAPIì—ì„œëŠ” DCë¥¼ í†µí•´ì„œ ì‘ì—…í•œë‹¤.
 
-		// ÆÄ¶õ»ö »ç°¢Çü + °ËÀº Å×µÎ¸®
+		// íŒŒë€ìƒ‰ ì‚¬ê°í˜• + ê²€ì€ í…Œë‘ë¦¬
 		HBRUSH brush = CreateSolidBrush(RGB(0, 0, 255));
-		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);  // ÆÄ¶õ»ö ¸é ÁöÁ¤, Èò»ö ¸é ÀúÀå
+		HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, brush);  // íŒŒë€ìƒ‰ ë©´ ì§€ì •, í°ìƒ‰ ë©´ ì €ì¥
 
-		HPEN bluePen = CreatePen(PS_SOLID, 2, RGB(0, 0, 255));  // »¡°£ Ææ »ı¼º
-		HPEN oldPen = (HPEN)SelectObject(hdc, bluePen);  // »¡°£ Å×µÎ¸® ÁöÁ¤
+		HPEN bluePen = CreatePen(PS_SOLID, 2, RGB(0, 0, 0));  // ë¹¨ê°„ íœ ìƒì„±
+		HPEN oldPen = (HPEN)SelectObject(hdc, bluePen);  // ë¹¨ê°„ í…Œë‘ë¦¬ ì§€ì •
 		
 		Rectangle(hdc, 100 + mX, 100 + mY, 200 + mX, 200 + mY);
-		DeleteObject(brush);  // ÆÄ¶õ»ö ¸é »èÁ¦ (brush´Â ÁÖ¼ÒÀÏ »Ó, ¸Ş¸ğ¸®¿¡´Â °è¼Ó ÀÖÀ¸´Ï±î Áö¿öÁÖ¾î¾ß ÇÔ)
-		SelectObject(hdc, oldBrush);  // Èò»ö ¸é ÁöÁ¤
+		DeleteObject(brush);  // íŒŒë€ìƒ‰ ë©´ ì‚­ì œ (brushëŠ” ì£¼ì†Œì¼ ë¿, ë©”ëª¨ë¦¬ì—ëŠ” ê³„ì† ìˆìœ¼ë‹ˆê¹Œ ì§€ì›Œì£¼ì–´ì•¼ í•¨)
+		SelectObject(hdc, oldBrush);  // í°ìƒ‰ ë©´ ì§€ì •
 
-		DeleteObject(bluePen);  // »¡°£ Ææ ¸Ş¸ğ¸® »èÁ¦
-		SelectObject(hdc, oldPen);  // °ËÀº¼½ Å×µÎ¸® ÁöÁ¤
+		DeleteObject(bluePen);  // ë¹¨ê°„ íœ ë©”ëª¨ë¦¬ ì‚­ì œ
+		SelectObject(hdc, oldPen);  // ê²€ì€ì„¹ í…Œë‘ë¦¬ ì§€ì •
 	}
 }
