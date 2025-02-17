@@ -1,4 +1,5 @@
 #include "geApplication.h"
+#include "geInput.h"
 
 namespace ge
 {
@@ -16,6 +17,7 @@ namespace ge
 	{
 		mHwnd = hWnd;
 		mHdc = GetDC(hWnd);
+		Input::Initialize();
 
         mSpeed = 0;
 	}
@@ -28,6 +30,7 @@ namespace ge
 
 	void Application::Update()
 	{
+		Input::Update();
 		mPlayer.Update();
 		mPlayer2.Update();
 	}
