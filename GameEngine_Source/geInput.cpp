@@ -14,47 +14,72 @@ namespace ge
 
 	void ge::Input::Initialize()
 	{
+		CreateKeys();
+	}
+
+	void ge::Input::Update()
+	{
+		UpdateKeys();
+	}
+
+	void ge::Input::CreateKeys()
+	{
 		for (size_t i = 0; i < (UINT)eKeyCode::End; i++)
 		{
 			Key key = {};
 			key.bPressed = false;
 			key.state = eKeyState::None;
 			key.keyCode = (eKeyCode)i;
-			
+
 			mKeys.push_back(key);
 		}
 	}
-
-	void ge::Input::Update()
+	void Input::UpdateKeys()
 	{
-		for (size_t i = 0; i < mKeys.size(); i++)
+		std::for_each(mKeys.begin(), mKeys.end(),
+			[](Key& key) -> void
 		{
-			// 키가 눌렸다.
-			if (GetAsyncKeyState(ASCII[i]) & 0x8000)
-			{
-				if (mKeys[i].bPressed)
-				{
-					mKeys[i].state = eKeyState::Pressed;  // 눌려있을 때, 또 누름
-				}
-				else
-				{
-					mKeys[i].state = eKeyState::Down;  // 안눌려있을 때, 누름
-				}
-
-				mKeys[i].bPressed = true;
-			}
-			else  // 키가 안눌렸다.
-			{
-				if (mKeys[i].bPressed)
-				{
-					mKeys[i].state = eKeyState::Up;  // 눌려있을 때, 땜
-				}
-				else
-				{
-					mKeys[i].state = eKeyState::None;
-				}
-				mKeys[i].bPressed = false;
-			}
+			UpdateKey(key);
+		});
+	}
+	void Input::UpdateKey(Input::Key& key)
+	{
+		if (IsKeyDown(key.keyCode))
+		{
+			UpdateKeyDown(key);
 		}
+		else  // 키가 안눌렸다.
+		{
+			UpdateKeyUp(key);
+		}
+	}
+	bool Input::IsKeyDown(eKeyCode code)
+	{
+		return GetAsyncKeyState(ASCII[ (UINT)code ]) & 0x8000;
+	}
+	void Input::UpdateKeyDown(Input::Key& key)
+	{
+		if (key.bPressed)
+		{
+			key.state = eKeyState::Pressed;  // 눌려있을 때, 또 누름
+		}
+		else
+		{
+			key.state = eKeyState::Down;  // 안눌려있을 때, 누름
+		}
+
+		key.bPressed = true;
+	}
+	void Input::UpdateKeyUp(Input::Key& key)
+	{
+		if (key.bPressed)
+		{
+			key.state = eKeyState::Up;  // 눌려있을 때, 땜
+		}
+		else
+		{
+			key.state = eKeyState::None;
+		}
+		key.bPressed = false;
 	}
 }
