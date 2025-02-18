@@ -2,7 +2,7 @@
 
 namespace ge
 {
-	std::vector<Input::Key> Input::mKeys = {};
+	std::vector<Input::Key> Input::Keys = {};
 	
 	int ASCII[(UINT)eKeyCode::End] =
 	{
@@ -12,17 +12,17 @@ namespace ge
 		VK_LEFT, VK_RIGHT, VK_DOWN, VK_UP,
 	};
 
-	void ge::Input::Initialize()
+	void Input::Initialize()
 	{
 		CreateKeys();
 	}
 
-	void ge::Input::Update()
+	void Input::Update()
 	{
 		UpdateKeys();
 	}
 
-	void ge::Input::CreateKeys()
+	void Input::CreateKeys()
 	{
 		for (size_t i = 0; i < (UINT)eKeyCode::End; i++)
 		{
@@ -31,12 +31,12 @@ namespace ge
 			key.state = eKeyState::None;
 			key.keyCode = (eKeyCode)i;
 
-			mKeys.push_back(key);
+			Keys.push_back(key);
 		}
 	}
 	void Input::UpdateKeys()
 	{
-		std::for_each(mKeys.begin(), mKeys.end(),
+		std::for_each(Keys.begin(), Keys.end(),
 			[](Key& key) -> void
 		{
 			UpdateKey(key);

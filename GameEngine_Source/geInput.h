@@ -32,9 +32,9 @@ namespace ge
 		static void Initialize();
 		static void Update();
 
-		static bool GetKeyDown(eKeyCode code) { return mKeys[(UINT)code].state == eKeyState::Down; }
-		static bool GetKeyUp(eKeyCode code) { return mKeys[(UINT)code].state == eKeyState::Up; }
-		static bool GetKey(eKeyCode code) { return mKeys[(UINT)code].state == eKeyState::Pressed; }  // Pressed
+		static bool GetKeyDown(eKeyCode code) { return Keys[(UINT)code].state == eKeyState::Down; }
+		static bool GetKeyUp(eKeyCode code) { return Keys[(UINT)code].state == eKeyState::Up; }
+		static bool GetKey(eKeyCode code) { return Keys[(UINT)code].state == eKeyState::Pressed; }  // Pressed
 
 	private:
 		static void CreateKeys();
@@ -46,7 +46,7 @@ namespace ge
 
 	private:
 		// eKeyState mState = eKeyState::None;  // down, up, stay, ...
-		static std::vector<Key> mKeys;
+		static std::vector<Key> Keys;
 	};
 }
 

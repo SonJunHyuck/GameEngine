@@ -1,5 +1,6 @@
 #include "geGameObject.h"
 #include "geInput.h"
+#include "geTime.h"
 
 namespace ge
 {
@@ -15,21 +16,23 @@ namespace ge
 
 	void GameObject::Update()
 	{
+		const int speed = 100;
+
 		if (Input::GetKey(eKeyCode::Left))
 		{
-			mX -= 0.1f;
+			mX -= speed * Time::DeltaTime();
 		}
 		if (Input::GetKey(eKeyCode::Right))
 		{
-			mX += 0.1f;
+			mX += speed * Time::DeltaTime();
 		}
 		if (Input::GetKey(eKeyCode::Up))
 		{
-			mY -= 0.1f;
+			mY -= speed * Time::DeltaTime();
 		}
 		if (Input::GetKey(eKeyCode::Down))
 		{
-			mY += 0.1f;
+			mY += speed * Time::DeltaTime();
 		}
 	}
 

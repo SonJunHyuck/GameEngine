@@ -1,5 +1,6 @@
 #include "geApplication.h"
 #include "geInput.h"
+#include "geTime.h"
 
 namespace ge
 {
@@ -17,6 +18,7 @@ namespace ge
 	{
 		mHwnd = hWnd;
 		mHdc = GetDC(hWnd);
+		Time::Initialize();
 		Input::Initialize();
 
         mSpeed = 0;
@@ -30,6 +32,7 @@ namespace ge
 
 	void Application::Update()
 	{
+		Time::Update();
 		Input::Update();
 		mPlayer.Update();
 		mPlayer2.Update();
@@ -40,6 +43,7 @@ namespace ge
 	}
 	void Application::Render()
 	{
+		Time::Render(mHdc);
 		mPlayer.Render(mHdc);
 		mPlayer2.Render(mHdc);
 	}

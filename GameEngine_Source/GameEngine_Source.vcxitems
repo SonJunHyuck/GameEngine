@@ -19,11 +19,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)geApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)geGameObject2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)geInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)geTime.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)geGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)geApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)geGameObject2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)geInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)geTime.cpp" />
   </ItemGroup>
 </Project>
