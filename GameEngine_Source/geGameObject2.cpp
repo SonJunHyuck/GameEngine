@@ -15,7 +15,9 @@ namespace ge
 
 	void GameObject2::Update()
 	{
-		if (Input::GetKey(eKeyCode::A))
+		mX += 0.1f;
+
+		/*if (Input::GetKey(eKeyCode::A))
 		{
 			mX -= 0.1f;
 		}
@@ -30,7 +32,7 @@ namespace ge
 		if (Input::GetKey(eKeyCode::S))
 		{
 			mY += 0.1f;
-		}
+		}*/
 	}
 
 	void GameObject2::LateUpdate()
@@ -53,11 +55,16 @@ namespace ge
 		HPEN redPen = CreatePen(PS_SOLID, 2, RGB(0, 0, 0));  // 빨간 펜 생성
 		HPEN oldPen = (HPEN)SelectObject(hdc, redPen);  // 빨간 테두리 지정
 
-		Ellipse(hdc, 1000 + mX, 500 + mY, 1100 + mX, 600 + mY);
+		Ellipse(hdc, mX, mY, 10 + mX, 10 + mY);
 		DeleteObject(brush);  // 파란색 면 삭제 (brush는 주소일 뿐, 메모리에는 계속 있으니까 지워주어야 함)
 		SelectObject(hdc, oldBrush);  // 흰색 면 지정
 
 		DeleteObject(redPen);  // 빨간 펜 메모리 삭제
 		SelectObject(hdc, oldPen);  // 검은섹 테두리 지정
+	}
+
+	void GameObject2::Destroy()
+	{
+		delete(this);
 	}
 }

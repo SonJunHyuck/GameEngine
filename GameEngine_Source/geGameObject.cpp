@@ -6,7 +6,7 @@ namespace ge
 {
 	GameObject::GameObject() : mX(0), mY(0)
 	{
-
+		bullets = std::vector<GameObject2>();
 	}
 
 	GameObject::~GameObject()
@@ -34,11 +34,22 @@ namespace ge
 		{
 			mY += speed * Time::DeltaTime();
 		}
+
+		if (Input::GetKeyDown(eKeyCode::Space))
+		{
+			GameObject2 bullet;
+			bullet.SetPosition(150 + mX, 150 + mY);
+			bullets.push_back(bullet);
+		}
+
+		for (auto &bullet : bullets)
+		{
+			bullet.Update();
+		}
 	}
 
 	void GameObject::LateUpdate()
 	{
-
 	}
 
 	void GameObject::Render(HDC hdc)
@@ -62,5 +73,10 @@ namespace ge
 
 		DeleteObject(bluePen);  // 빨간 펜 메모리 삭제
 		SelectObject(hdc, oldPen);  // 검은섹 테두리 지정
+
+		for (auto& bullet : bullets)
+		{
+			bullet.Render(hdc);
+		}
 	}
 }

@@ -11,7 +11,7 @@ namespace ge
 		Application();
 		~Application();
 
-		void Initialize(HWND hWnd);
+		void Initialize(HWND hWnd, UINT width, UINT height);
 		void Run();
 
 		void Update();
@@ -20,12 +20,13 @@ namespace ge
 	private:
 		HWND mHwnd;
 		HDC mHdc;
+		HDC mBackHdc;
 
-		float mSpeed;
+		HBITMAP mBackBuffer;
 
-		// 플레이어
-		/*float mX;
-		float mY;*/
+
+		UINT mWidth;
+		UINT mHeight;
 
 		GameObject mPlayer;
 		GameObject2 mPlayer2;

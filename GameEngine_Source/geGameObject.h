@@ -1,5 +1,6 @@
 #pragma once
 #include "CommonInclude.h"
+#include "geGameObject2.h"
 
 namespace ge
 {	
@@ -16,6 +17,8 @@ namespace ge
 	private:
 		float mX;
 		float mY;
+
+		std::vector<GameObject2> bullets;
 	};
 }
 

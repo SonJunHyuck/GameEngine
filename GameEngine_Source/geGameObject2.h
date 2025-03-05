@@ -12,6 +12,11 @@ namespace ge
 		void Update();
 		void LateUpdate();
 		void Render(HDC hdc);
+		void Destroy();
+
+		float GetX() { return mX; }
+		float GetY() { return mY; }
+		void SetPosition(float x, float y) { mX = x; mY = y; }
 
 	private:
 		float mX;
