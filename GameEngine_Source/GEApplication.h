@@ -17,6 +17,13 @@ namespace ge
 		void Update();
 		void LateUpdate();
 		void Render();
+
+	private:
+		void AdjustWindow(HWND hwnd, UINT width, UINT height);
+		void ClearRenderTarget();
+		void CopyRenderTarget(HDC source, HDC dest);
+		void CreateBuffer(UINT width, UINT height);
+
 	private:
 		HWND mHwnd;
 		HDC mHdc;
@@ -27,8 +34,5 @@ namespace ge
 
 		UINT mWidth;
 		UINT mHeight;
-
-		GameObject mPlayer;
-		GameObject2 mPlayer2;
 	};
 }

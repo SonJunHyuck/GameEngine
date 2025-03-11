@@ -15,17 +15,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)geEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)geGameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)geApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)geGameObject2.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)geInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)geScene.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)geSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)geTime.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)geEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)geGameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)geApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)geGameObject2.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)geInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)geScene.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)geSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)geTime.cpp" />
   </ItemGroup>
 </Project>

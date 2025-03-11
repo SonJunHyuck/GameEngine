@@ -4,7 +4,8 @@
 #include "framework.h"
 #include "Editor_Window.h"
 
-#include "..\\GameEngine_Source\GEApplication.h"
+#include "..\\GameEngine_Source\geApplication.h"
+#include "..\\GameEngine_Window\geLoadScene.h"
 
 #define MAX_LOADSTRING 100
 
@@ -141,6 +142,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
+
+   // loadScenes
+   ge::LoadScenes();
 
    return TRUE;
 }
